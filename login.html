@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+   <div>
+    <form id="loginForm" method="POST" action="login.php">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <br>
+        <label for="user_type">User Type:</label>
+        <select name="user_type" id="user_type">
+            <option value="admin">Admin</option>
+            <option value="patient">Patient</option>
+            <option value="nurse">Nurse</option>
+        </select>
+        <br>
+        <input type="submit" value="Login">
+    </form>
+   </div>
+
+</body>
+</html>
+
