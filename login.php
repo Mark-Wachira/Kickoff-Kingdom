@@ -24,20 +24,10 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     if ($password == $row['Password']) {
-        if ($row['user_type'] == 'admin') {
-            session_start();
-            $_SESSION['admin_name'] = $row['FullName']; // assuming 'name' is 'FullName'
-            header("Location: dashboardadmin.html");
-            exit();
-        } elseif ($row['user_type'] == 'customer') {
-            session_start();
-            $_SESSION['customer_name'] = $row['FullName']; // assuming 'name' is 'FullName'
-            header("Location: dashboardcustomer.html");
-            exit();
-        }  else {
-            $response = array("status" => "error", "message" => "Invalid user type");
-            echo json_encode($response);
-        }
+        session_start();
+        $_SESSION['user_name'] = $row['FullName']; // assuming 'name' is 'FullName'
+        header("Location: checkout.html");
+        exit();
     } else {
         $response = array("status" => "error", "message" => "Invalid password");
         echo json_encode($response);

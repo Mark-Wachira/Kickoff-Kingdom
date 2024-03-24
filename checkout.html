@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart</title>
+<link rel="stylesheet" href="dashboardcustomer.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Shopping Cart</h1>
+    <div class="gallery">
+        <h2>Product 1</h2>
+        <div class="gallery-item">
+          <img src="image1.jpg" alt="Image 1">
+          <div class = "description">Price $16</div>
+    
+    <button class="btn" onclick="addToCart('Product 1', 16.00)">Add to Cart</button>
+</div>
+
+
+    <div class="gallery">
+        <h2>Product 2</h2>
+        <div class="gallery-item">
+          <img src="image2.jpg" alt="Image 2">
+          <div class = "description">Price $12</div>
+    
+    <button class="btn" onclick="addToCart('Product 2', 12.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+    <h2>Product 3</h2>
+    <div class="gallery-item">
+      <img src="image3.jpg" alt="Image 3">
+      <div class = "description">Price $15</div>
+
+<button class="btn" onclick="addToCart('Product 3', 15.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 4</h2>
+<div class="gallery-item">
+  <img src="image4.jpg" alt="Image 4">
+  <div class = "description">Price $11</div>
+
+<button class="btn" onclick="addToCart('Product 4', 11.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 5</h2>
+<div class="gallery-item">
+  <img src="image5.jpg" alt="Image 5">
+  <div class = "description">Price $16</div>
+
+<button class="btn" onclick="addToCart('Product 5', 16.00)">Add to Cart</button>
+</div>
+</div>
+<div class="gallery">
+<h2>Product 6</h2>
+<div class="gallery-item">
+  <img src="image6.jpg" alt="Image 6">
+  <div class = "description">Price $1000</div>
+
+<button class="btn" onclick="addToCart('Product 6', 1000.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 7</h2>
+<div class="gallery-item">
+  <img src="image7.jpg" alt="Image 7">
+  <div class = "description">Price $100</div>
+
+<button class="btn" onclick="addToCart('Product 7', 100.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 8</h2>
+<div class="gallery-item">
+  <img src="image8.jpg" alt="Image 8">
+  <div class = "description">Price $40</div>
+
+<button class="btn" onclick="addToCart('Product 8', 40.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 9</h2>
+<div class="gallery-item">
+  <img src="image9.jpg" alt="Image 9">
+  <div class = "description">Price $30 </div>
+
+<button class="btn" onclick="addToCart('Product 9', 30.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 10</h2>
+<div class="gallery-item">
+  <img src="image10.jpg" alt="Image 10">
+  <div class = "description">Price $12</div>
+
+<button class="btn" onclick="addToCart('Product 10', 12.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 11</h2>
+<div class="gallery-item">
+  <img src="image11.jpg" alt="Image 11">
+  <div class = "description">Price $ 45</div>
+
+<button class="btn" onclick="addToCart('Product 11', 45.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 12</h2>
+<div class="gallery-item">
+  <img src="image12.jpg" alt="Image 12">
+  <div class = "description">Price $20</div>
+
+<button class="btn" onclick="addToCart('Product 12', 20.00)">Add to Cart</button>
+</div>
+<div class="gallery">
+<h2>Product 13</h2>
+<div class="gallery-item">
+  <img src="image13.jpg" alt="Image 13">
+  <div class = "description">Price $ 25</div>
+
+<button class="btn" onclick="addToCart('Product 13', 25.00)">Add to Cart</button>
+</div>
+      
+    <div id="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items">
+        </ul>
+        <p>Total: $<span id="total">0.00</span></p>
+        <form action="checkout.php" method="post" id="checkout-form">
+            <input type="hidden" name="cart" id="cart-input" value="<?php echo htmlspecialchars(json_encode($_SESSION['cart'])); ?>">
+            <button type="submit" class="btn">Checkout</button>
+        </form>
+    </div>
+
+</div> <!-- Close the .container div properly -->
+</div>
+<script src="dashboardcustomer.js"></script> <!-- Corrected the script tag -->
+
+</body>
+</html>

@@ -1,62 +1,57 @@
 <?php
-// Start the session to access session variables
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['customer_name'])) {
-    // If the user is not logged in, redirect to the login page
-    header("Location: login.php");
+// Check if the cart exists in the session
+if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+    // If the cart is empty, redirect to the shopping cart page
+    header("Location: checkout.html");
     exit;
 }
 
-// Get the username from the session
-$username = $_SESSION['username'];
+// Retrieve cart items from session
+$cart_items = $_SESSION['cart'];
 
-// Establishing a connection to the MySQL database
+// Establish database connection
 $serverName = "localhost";
 $userName = "root";
 $password = "";
 $dataBaseName = "kickoff_kingdom";
 
-// Create connection
-$conn = new mysqli($servername, $db_username, $db_password, $database);
+$conn = new mysqli($serverName, $userName, $password, $dataBaseName);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Prepare statement for inserting cart items into the database
+$stmt = $conn->prepare("INSERT INTO orders (FullName, product_name, product_price) VALUES (?, ?, ?)");
 
-    if ($conn->query($sql) === TRUE) {
-        // After inserting user data, you can also handle the cart items here
-        // Retrieve cart items from session
-        $cart_items = $_SESSION['cart'];
+// Bind parameters
+$stmt->bind_param("sss", $fullname, $product_name, $product_price);
 
-        // Iterate through cart items and process them
-        foreach ($cart_items as $item) {
-            $product_name = $item['name'];
-            $product_price = $item['price'];
+// Get the full name from the session
+$fullname = $_SESSION['customer_name'];
 
-            // Insert cart items into the database
-            $sql = "INSERT INTO orders (username, product_name, product_price) VALUES ('$username', '$product_name', '$product_price')";
-            if ($conn->query($sql) !== TRUE) {
-                echo "Error inserting cart items: " . $conn->error;
-            }
-        }
+// Iterate through cart items and insert them into the database
+foreach ($cart_items as $item) {
+    $product_name = $item['name'];
+    $product_price = $item['price'];
 
-        // Clear the cart after checkout
-        unset($_SESSION['cart']);
-
-        echo "User data and cart items inserted successfully!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    // Execute the prepared statement
+    if (!$stmt->execute()) {
+        echo "Error inserting cart items: " . $stmt->error;
     }
-     {
-    // Redirect user if they try to access this page directly without submitting the form
-    header("Location: login.html");
-    exit;
 }
+
+// Close the prepared statement
+$stmt->close();
+
+// Clear the cart after checkout
+unset($_SESSION['cart']);
 
 // Close the database connection
 $conn->close();
+
+exit;
 ?>

@@ -15,9 +15,9 @@ if ($conn->connect_error) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $user_type = $_POST['user_type']; // Adding user type
+        
 
-        $sql = "INSERT INTO register (FullName, Email, password, user_type) VALUES ('$name', '$email', '$password', '$user_type')"; // Including user type in the query
+        $sql = "INSERT INTO register (FullName, Email, password) VALUES ('$name', '$email', '$password')"; // Including user type in the query
 
         $res = $conn->query($sql);
         if ($res) {
